@@ -1,0 +1,42 @@
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+# Email account credentials
+sender_email = "your_email@gmail.com"
+sender_password = "your_generated_app_password"  # Use the App Password generated
+recipient_email = "kenronoh254@gmail.com"
+
+# Email content
+subject = "Random subject"
+body = "Hello Ken, this is a test email sent using Python."
+
+# Setup the MIME
+message = MIMEMultipart()
+message['From'] = sender_email
+message['To'] = recipient_email
+message['Subject'] = subject
+
+# Attach the body to the email
+message.attach(MIMEText(body, 'plain'))
+
+try:
+    # Create SMTP session for sending the mail
+    session = smtplib.SMTP('smtp.gmail.com', 587)
+    session.starttls()  # Enable security
+    session.login(sender_email, sender_password)  # Login with App Password
+
+    # Send email
+    text = message.as_string()
+    session.sendmail(sender_email, recipient_email, text)
+    print('Email sent successfully!')
+
+except smtplib.SMTPAuthenticationError as e:
+    print(f'Authentication error occurred: {e.smtp_error}')
+except smtplib.SMTPException as e:
+    print(f'SMTP error occurred: {str(e)}')
+except Exception as e:
+    print(f'Error occurred: {str(e)}')
+
+finally:
+    session.quit()  # Terminate the SMTP session
