@@ -12,7 +12,9 @@ Create a new Python script (e.g., send_email.py) and paste the following code in
 Step 3: Run the Script
 Save the script and run it from your terminal or command prompt:
 
---------   Copy code:python send_email.py
+--------   Copy code:     python send_email.py
+
+
 
 Notes:
 Ensure that you have allowed less secure apps to access your Gmail account if you encounter authentication issues. You might also need to use an App Password if you have two-factor authentication enabled.
